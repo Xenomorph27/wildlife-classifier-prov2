@@ -1,4 +1,4 @@
-# Wildlife-Classifier-prov2
+# Wildlife-Classifier-pro-v2
 Advanced wildlife classification system supporting multiple species using deep learning and computer vision.
 
 ---
