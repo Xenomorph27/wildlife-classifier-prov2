@@ -32,9 +32,9 @@ The system follows a complete machine learning pipeline:
 ##  Project Structure
 
 
-wildlife-classifier-pro/
-│
-├── train.py # Model training script            
+wildlife-classifier-pro/         
+│                     
+├── train.py # Model training script                        
 ├── predict.py # Inference script          
 ├── dataset/ # Training dataset         
 ├── model/ # Trained models         
