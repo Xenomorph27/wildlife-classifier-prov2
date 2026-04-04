@@ -34,11 +34,9 @@ The system follows a complete machine learning pipeline:
 
 wildlife-classifier-pro/         
 │                     
-├── train.py # Model training script                        
-├── predict.py # Inference script          
-├── dataset/ # Training dataset         
-├── model/ # Trained models         
-├── results/ # Output predictions       
+├── rap.py  # Model training script                                  
+├── best_model_v2.pt / # Trained models         
+├── yolov8x.pt / # Output predictions       
 ├── requirements.txt # Dependencies               
 └── README.md
 
