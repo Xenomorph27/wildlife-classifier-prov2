@@ -55,5 +55,5 @@ pip install -r requirements.txt
 ## Usage
 In Terminal navigate to respective folder and and run:
 ```bash
-python predict.py
+python rap.py
 ```
