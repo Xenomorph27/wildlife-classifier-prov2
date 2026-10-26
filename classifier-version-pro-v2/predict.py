@@ -1,3 +1,6 @@
+import argparse
+from pathlib import Path
+
 import torch
 import cv2
 from torchvision import transforms, models
@@ -7,15 +10,16 @@ from PIL import Image
 # ======================
 # PATHS
 # ======================
-CLASSIFIER_PATH = "best_model_v2.pt"
-YOLO_PATH = "yolov8x.pt"
+HERE = Path(__file__).resolve().parent
+CLASSIFIER_PATH = HERE / "best_model_v2.pt"
+YOLO_PATH = HERE / "yolov8x.pt"
 
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
 # ======================
 # LOAD YOLO
 # ======================
-yolo_model = YOLO(YOLO_PATH)
+yolo_model = YOLO(str(YOLO_PATH))
 
 # ======================
 # CLASS NAMES (IMPORTANT)
@@ -44,19 +48,19 @@ transform = transforms.Compose([
 # ======================
 # PIPELINE
 # ======================
-def run_pipeline(image_path):
-    img = cv2.imread(image_path)
+def run_pipeline(image_path, save_path=None, show=True, min_conf=0.0):
+    img = cv2.imread(str(image_path))
 
     if img is None:
-        print("Image not found ❌")
+        print(f"Image not found ❌ ({image_path})")
         return
 
-    results = yolo_model(img, conf=0.25)
+    results = yolo_model(img, conf=0.25, verbose=False)
 
     boxes = results[0].boxes
 
     if boxes is None or len(boxes) == 0:
-        print("No animal detected ❌")
+        print(f"No animal detected ❌ ({image_path})")
         return
 
     for box in boxes:
@@ -81,20 +85,43 @@ def run_pipeline(image_path):
 
         label = class_names[pred.item()]
         confidence = conf.item() * 100
+        if confidence < min_conf:
+            continue
+        print(f"{Path(image_path).name}: {label} ({confidence:.1f}%)")
 
         # Draw
         cv2.rectangle(img, (x1, y1), (x2, y2), (0,255,0), 2)
         cv2.putText(img, f"{label} ({confidence:.1f}%)",
-                    (x1, y1-10),
+                    (x1, max(y1-10, 20)),
                     cv2.FONT_HERSHEY_SIMPLEX, 0.8,
                     (0,255,0), 2)
 
-    cv2.imshow("Result", img)
-    cv2.waitKey(0)
-    cv2.destroyAllWindows()
+    if save_path:
+        cv2.imwrite(str(save_path), img)
+
+    if show:
+        cv2.imshow("Result", img)
+        cv2.waitKey(0)
+        cv2.destroyAllWindows()
 
 # ======================
 # RUN
 # ======================
 if __name__ == "__main__":
-    run_pipeline("test.jpg")   # change image here
+    parser = argparse.ArgumentParser(description="Detect and classify wildlife in images.")
+    parser.add_argument("images", nargs="*", default=[str(HERE / "test.jpg")],
+                        help="image file(s) to classify (default: test.jpg)")
+    parser.add_argument("--save", metavar="DIR",
+                        help="write annotated images to this folder")
+    parser.add_argument("--min-conf", type=float, default=0.0, metavar="PCT",
+                        help="hide predictions below this confidence (0-100)")
+    parser.add_argument("--no-show", action="store_true",
+                        help="don't open a preview window")
+    args = parser.parse_args()
+
+    if args.save:
+        Path(args.save).mkdir(parents=True, exist_ok=True)
+
+    for image in args.images:
+        out = Path(args.save) / Path(image).name if args.save else None
+        run_pipeline(image, save_path=out, show=not args.no_show, min_conf=args.min_conf)
