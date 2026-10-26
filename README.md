@@ -1,38 +1,26 @@
+<img src="docs/assets/banner.jpg" alt="Wildlife Classifier Pro v2 — 52 species, 91.5% accuracy, two stages" width="100%">
+
 <div align="center">
 
-<img src="docs/assets/banner.png" alt="Wildlife Classifier Pro v2" height="72">
+**Detect** with YOLOv8x &nbsp;→&nbsp; **Crop** every animal &nbsp;→&nbsp; **Classify** with EfficientNet-B4 &nbsp;→&nbsp; **Annotate**
 
-<br/>
+<img alt="52 species" src="https://img.shields.io/badge/species-52-4ade80?style=for-the-badge&labelColor=07140b">
+<img alt="91.5% accuracy" src="https://img.shields.io/badge/accuracy-91.5%25-4ade80?style=for-the-badge&labelColor=07140b">
+<img alt="YOLOv8x" src="https://img.shields.io/badge/YOLOv8x-detector-166534?style=for-the-badge&labelColor=07140b">
+<img alt="EfficientNet-B4" src="https://img.shields.io/badge/EfficientNet--B4-classifier-166534?style=for-the-badge&labelColor=07140b">
+<a href="LICENSE"><img alt="MIT" src="https://img.shields.io/badge/license-MIT-166534?style=for-the-badge&labelColor=07140b"></a>
 
-![Accuracy](https://img.shields.io/badge/Accuracy-~91.5%25-22C55E?labelColor=30363d) ![Species](https://img.shields.io/badge/Species-52-22C55E?labelColor=30363d) ![YOLOv8x](https://img.shields.io/badge/YOLOv8x-detection-111F68?labelColor=30363d&logo=yolo&logoColor=white) ![EfficientNet](https://img.shields.io/badge/EfficientNet-B4-4285F4?labelColor=30363d) ![PyTorch](https://img.shields.io/badge/PyTorch-CPU_·_CUDA-EE4C2C?labelColor=30363d&logo=pytorch&logoColor=white) [![License](https://img.shields.io/badge/License-MIT-22C55E?labelColor=30363d)](LICENSE)
-
-<br/>
-
-<img src="docs/assets/card.png" alt="52 species — ~91.5% classification accuracy" height="60">
-
-<br/><br/>
-
-[How it works](#how-it-works) | [Examples](#examples) | [Supported species](#supported-species) | [Quick start](#quick-start)
+[How it works](#how-it-works) — [Examples](#examples) — [Species](#supported-species) — [Quick start](#quick-start)
 
 </div>
 
----
+## 📓 Field notes
 
-# Wildlife Classifier Pro v2: Detect Every Animal, Name Every Species
+**Oct 2026** &nbsp;·&nbsp; `predict.py` gets a real command line — classify many images at once, save annotated copies with
+`--save`, hide weak guesses with `--min-conf`, run headless with `--no-show`.
 
-A two-stage computer-vision pipeline: **YOLOv8x** finds each animal and crops it, then a fine-tuned **EfficientNet-B4** classifies every crop with a confidence score — 52 species, ~91.5% accuracy.
-
-## News
-
-- [2026-10] **Command line for `predict.py`:** classify many images at once, save annotated copies with `--save`, hide weak guesses with `--min-conf`, and run headless with `--no-show`.
-- [2026-04] **Pro v2 released:** YOLOv8x detection + EfficientNet-B4 classification across 52 species, succeeding the 3-class edge classifier.
-
-<div align="center">
-<img src="docs/results/mongoose-mob.jpg" alt="Six mongooses on a termite mound, each in its own box labelled mongoose with 84–99% confidence" width="80%">
-<br/>
-<sub>Six mongooses, six detections, every one classified correctly (<code>--min-conf 50</code>).</sub>
-</div>
-
+**Apr 2026** &nbsp;·&nbsp; Pro v2 released — YOLOv8x detection + EfficientNet-B4 classification across 52 species,
+succeeding the 3-class edge classifier.
 
 ---
 
