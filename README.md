@@ -1,26 +1,38 @@
 <div align="center">
 
-# 🦌 Wildlife Classifier Pro v2
-
-### Detect every animal in a photo, then name the species — 52 classes, ~91.5% accuracy
-
-A two-stage computer-vision pipeline: **YOLOv8x** finds each animal and crops it,
-then a fine-tuned **EfficientNet-B4** classifies every crop with a confidence score.
-
-![Python](https://img.shields.io/badge/Python-3776ab?logo=python&logoColor=white)
-![PyTorch](https://img.shields.io/badge/PyTorch-ee4c2c?logo=pytorch&logoColor=white)
-![YOLOv8](https://img.shields.io/badge/YOLOv8x-111f68?logo=yolo&logoColor=white)
-![EfficientNet](https://img.shields.io/badge/EfficientNet--B4-4285f4)
-![OpenCV](https://img.shields.io/badge/OpenCV-5c3ee8?logo=opencv&logoColor=white)
-[![License: MIT](https://img.shields.io/badge/license-MIT-blue)](LICENSE)
+<img src="docs/assets/banner.png" alt="Wildlife Classifier Pro v2" height="72">
 
 <br/>
 
-<img src="docs/results/mongoose-mob.jpg" alt="Six mongooses on a termite mound, each in its own box labelled mongoose with 84–99% confidence" width="80%">
+![Accuracy](https://img.shields.io/badge/Accuracy-~91.5%25-22C55E?labelColor=30363d) ![Species](https://img.shields.io/badge/Species-52-22C55E?labelColor=30363d) ![YOLOv8x](https://img.shields.io/badge/YOLOv8x-detection-111F68?labelColor=30363d&logo=yolo&logoColor=white) ![EfficientNet](https://img.shields.io/badge/EfficientNet-B4-4285F4?labelColor=30363d) ![PyTorch](https://img.shields.io/badge/PyTorch-CPU_·_CUDA-EE4C2C?labelColor=30363d&logo=pytorch&logoColor=white) [![License](https://img.shields.io/badge/License-MIT-22C55E?labelColor=30363d)](LICENSE)
 
-<sub>Six mongooses, six detections, every one classified correctly (<code>--min-conf 50</code>).</sub>
+<br/>
+
+<img src="docs/assets/card.png" alt="52 species — ~91.5% classification accuracy" height="60">
+
+<br/><br/>
+
+[How it works](#how-it-works) | [Examples](#examples) | [Supported species](#supported-species) | [Quick start](#quick-start)
 
 </div>
+
+---
+
+# Wildlife Classifier Pro v2: Detect Every Animal, Name Every Species
+
+A two-stage computer-vision pipeline: **YOLOv8x** finds each animal and crops it, then a fine-tuned **EfficientNet-B4** classifies every crop with a confidence score — 52 species, ~91.5% accuracy.
+
+## News
+
+- [2026-10] **Command line for `predict.py`:** classify many images at once, save annotated copies with `--save`, hide weak guesses with `--min-conf`, and run headless with `--no-show`.
+- [2026-04] **Pro v2 released:** YOLOv8x detection + EfficientNet-B4 classification across 52 species, succeeding the 3-class edge classifier.
+
+<div align="center">
+<img src="docs/results/mongoose-mob.jpg" alt="Six mongooses on a termite mound, each in its own box labelled mongoose with 84–99% confidence" width="80%">
+<br/>
+<sub>Six mongooses, six detections, every one classified correctly (<code>--min-conf 50</code>).</sub>
+</div>
+
 
 ---
 
